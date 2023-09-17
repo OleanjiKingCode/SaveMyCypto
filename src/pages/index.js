@@ -82,24 +82,41 @@ export default function Home() {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
+                    className={`text-lg font-medium text-center leading-6 text-gray-900 ${fondamento.className} `}
                   >
-                    Payment successful
+                    Sign Up
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
+                  <div className="mt-4 flex flex-col space-y-4">
+                    <div className="flex flex-row w-full space-x-3">
+                      <span className="w-[40%]">Official Name:</span>{" "}
+                      <input
+                        type="text"
+                        className="w-full h-6 border-slate-600 border-[1px] rounded-lg"
+                      />
+                    </div>
+                    <div className="flex flex-row space-x-3">
+                      <span className="w-[40%]">Nickname:</span>{" "}
+                      <input
+                        type="text"
+                        className="w-full h-6 border-slate-600 border-[1px] rounded-lg"
+                      />
+                    </div>
+                    <div className="flex flex-row space-x-3">
+                      <span className="w-[40%]">Email:</span>{" "}
+                      <input
+                        type="text"
+                        className="w-full h-6 border-slate-600 border-[1px] rounded-lg"
+                      />
+                    </div>
                   </div>
 
-                  <div className="mt-4">
+                  <div className="mt-4 flex justify-center">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-black hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
-                      Got it, thanks!
+                      Continue
                     </button>
                   </div>
                 </Dialog.Panel>
