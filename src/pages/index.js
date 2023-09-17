@@ -1,5 +1,5 @@
 import { Inter, Noto_Serif_Georgian } from "next/font/google";
-import Lottie from "lottie-react";
+// import Lottie from "lottie-react";
 import arrow from './../data/arrow.json'
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,13 +26,13 @@ export default function Home() {
         This project was created to properly handle crypto of anyone in case of
         loss of life of the owner.
       </div>
-      <Lottie
+      {/* <Lottie
         loop={true}
         animationData={arrow}
         style={{
           height: 360,
         }}
-      />
+      /> */}
       <div
         className={`bg-[#ec84fa] px-5 mr-14 py-4 rounded-3xl text-white font-semibold text-3xl `}
       >
