@@ -1,10 +1,10 @@
-import { Inter, Noto_Serif_Georgian } from "next/font/google";
-// import Lottie from "lottie-react";
-import arrow from "./../data/arrow.json";
+import { Inter, Fondamento } from "next/font/google";
+import Lottie from "lottie-react";
+import arrow from "./../data/arrowBlack.json";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const serif = Noto_Serif_Georgian({
+const fondamento = Fondamento({
   weight: "400",
   subsets: ["latin"],
 });
@@ -12,29 +12,32 @@ const serif = Noto_Serif_Georgian({
 export default function Home() {
   return (
     <div
-      className={`flex min-h-screen flex-col items-center space-y-10 p-24 bg-gradient-to-br from-red-500 via-purple-500 to-black w-full ${inter.className}`}
+      className={`flex min-h-screen flex-col items-center space-y-9 p-24 bg-white w-full ${inter.className}`}
     >
-      <div className="flex flex-row space-x-3 text-7xl font-bold text-white">
+      <div className="flex flex-row space-x-3 text-7xl w-full items-center justify-center text-center font-bold text-black">
         <span>Save</span>
-        <span className=" px-4 py-3 rounded-3xl bg-[#7bcefd] text-black ">
+        <span className=" px-4 py-3 rounded-3xl bg-[#7bcefd] text-white ">
           YOUR
         </span>
         <span>Crypto</span>
       </div>
 
-      <div className="text-white py-24">
-        This project was created to properly handle crypto of anyone in case of
-        loss of life of the owner.
+      <div
+        className={`text-black pt-[65px] text-center w-[70%] text-lg ${fondamento.className} `}
+      >
+        This project was created to properly handle crypto of anyone as
+        instructed in case of loss of life or any unfortunacy that befalls the
+        owner.
       </div>
-      {/* <Lottie
+      <Lottie
         loop={true}
         animationData={arrow}
         style={{
-          height: 360,
+          height: 70,
         }}
-      /> */}
+      />
       <div
-        className={`bg-[#ec84fa] px-5 mr-14 py-4 rounded-3xl text-white font-semibold text-3xl `}
+        className={`bg-black px-5 py-4 rounded-3xl text-white font-semibold text-2xl `}
       >
         Get Started
       </div>
