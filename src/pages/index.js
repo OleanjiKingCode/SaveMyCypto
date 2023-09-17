@@ -1,6 +1,6 @@
 import { Inter, Noto_Serif_Georgian } from "next/font/google";
-
-import arrow from './data/arrow.json'
+import Lottie from "lottie-react";
+import arrow from './../data/arrow.json'
 
 const inter = Inter({ subsets: ["latin"] });
 
