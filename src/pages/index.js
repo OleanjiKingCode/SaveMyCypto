@@ -1,7 +1,11 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import { Inter, Noto_Serif_Georgian } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const serif = Noto_Serif_Georgian({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function Home() {
   return (
@@ -16,7 +20,16 @@ export default function Home() {
         <span>Crypto</span>
       </div>
 
-      
+      <div className="text-white py-28">
+        This project was created to properly handle crypto of anyone in case of
+        loss of life of the owner.
+      </div>
+
+      <div
+        className={`bg-[#ec84fa] px-5 mr-14 py-4 rounded-3xl text-white font-semibold text-3xl `}
+      >
+        Get Started
+      </div>
     </div>
   );
 }
