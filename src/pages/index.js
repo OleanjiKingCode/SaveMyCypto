@@ -1,6 +1,6 @@
 import { Inter, Noto_Serif_Georgian } from "next/font/google";
 // import Lottie from "lottie-react";
-import arrow from './../data/arrow.json'
+import arrow from "./../data/arrow.json";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +22,7 @@ export default function Home() {
         <span>Crypto</span>
       </div>
 
-      <div className="text-white py-28">
+      <div className="text-white py-24">
         This project was created to properly handle crypto of anyone in case of
         loss of life of the owner.
       </div>
