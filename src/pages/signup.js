@@ -11,7 +11,7 @@ const fondamento = Fondamento({
 export default function signup() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white py-4 w-[40%] h-[50%] px-9 rounded-lg shadow-md">
+      <div className="bg-white py-5 w-[40%] h-[50%] px-9 rounded-lg shadow-md">
         <div
           className={`text-xl font-medium w-full text-center leading-6 text-gray-900 ${fondamento.className} `}
         >
@@ -51,6 +51,12 @@ export default function signup() {
             <Link href="/signIn" className="text-blue-500 underline">
               Sign In
             </Link>
+          </div>
+
+          <div className="text-right">
+            <button className=" rounded-xl text-md p-2 w-[15%] text-center bg-black text-white float-right ">
+              Next
+            </button>
           </div>
         </div>
       </div>

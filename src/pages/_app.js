@@ -24,7 +24,7 @@ const { chains, publicClient } = configureChains(
 );
 const { connectors } = getDefaultWallets({
   appName: "Save YOUR Crypto",
-  projectId: "YOUR_PROJECT_ID",
+  projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_ID,
   chains,
 });
 const wagmiConfig = createConfig({
@@ -33,11 +33,10 @@ const wagmiConfig = createConfig({
   publicClient,
 });
 
-
 const lightModeStyle = Object.assign(
   {},
   lightTheme({
-    borderRadius: "small",
+    borderRadius: "large",
     fontStack: "system",
     overlayBlur: "small",
   }),
