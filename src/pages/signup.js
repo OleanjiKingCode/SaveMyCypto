@@ -1,14 +1,19 @@
+import { useMultipleForm } from "@/context/useMultipleForm";
 import React from "react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { Inter, Fondamento } from "next/font/google";
-import Link from "next/link";
-
-const fondamento = Fondamento({
-  weight: "400",
-  subsets: ["latin"],
-});
+import { fondamento } from "./_app";
+import Step1 from "./step1";
+import Step2 from "./step2";
 
 export default function signup() {
+  const {
+    currentStepIndex,
+    steps,
+    step,
+    previous,
+    next,
+    isFirstIndex,
+    isLastIndex,
+  } = useMultipleForm([<Step1 />, <Step2 />]);
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white py-5 w-[40%] h-[50%] px-9 rounded-lg shadow-md">
@@ -17,47 +22,27 @@ export default function signup() {
         >
           Sign Up
         </div>
-
-        <div className="mt-6 flex flex-col space-y-8">
-          <div className="flex flex-row w-full space-x-3 items-center">
-            <span className="w-[60%]">Official Name:</span>{" "}
-            <input
-              type="text"
-              className="w-full h-6 py-4 px-3 border-slate-600 border-[1px] rounded-lg"
-            />
-          </div>
-          <div className="flex flex-row space-x-3 items-center ">
-            <span className="w-[60%]">Nickname:</span>{" "}
-            <input
-              type="text"
-              className="w-full h-6 py-4 px-3 border-slate-600 border-[1px] rounded-lg"
-            />
-          </div>
-          <div className="flex flex-row space-x-3 items-center">
-            <span className="w-[60%]">Email:</span>{" "}
-            <input
-              type="text"
-              className="w-full h-6 py-4 px-3 border-slate-600 border-[1px] rounded-lg"
-            />
-          </div>
-          <div className="flex  justify-center">
-            <ConnectButton />
-          </div>
-
-          <div
-            className={`${fondamento.className} mt-10 w-full text-center space-x-3`}
-          >
-            <span>Already have an account?</span>
-            <Link href="/signIn" className="text-blue-500 underline">
-              Sign In
-            </Link>
-          </div>
-
-          <div className="text-right">
-            <button className=" rounded-xl text-md p-2 w-[15%] text-center bg-black text-white float-right ">
-              Next
+        {step}
+        <div
+          className={`w-full flex flex-row ${
+            isFirstIndex ? "justify-end" : "justify-between"
+          } items-center`}
+        >
+          {!isFirstIndex && (
+            <button
+              className=" rounded-lg text-md py-2 px-5 text-center bg-black text-white "
+              onClick={previous}
+            >
+              Back
             </button>
-          </div>
+          )}
+
+          <button
+            className=" rounded-lg text-md py-2 px-5 text-center bg-black text-white "
+            onClick={next}
+          >
+            {isLastIndex ? "Finish" : "Next"}
+          </button>
         </div>
       </div>
     </div>
