@@ -9,6 +9,14 @@ import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { mainnet, polygon } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
+import { Inter, Fondamento } from "next/font/google";
+
+export const fondamento = Fondamento({
+  weight: "400",
+  subsets: ["latin"],
+});
+
+export const inter = Inter({ subsets: ["latin"] });
 
 const { chains, publicClient } = configureChains(
   [mainnet, polygon],
@@ -24,6 +32,7 @@ const wagmiConfig = createConfig({
   connectors,
   publicClient,
 });
+
 
 const lightModeStyle = Object.assign(
   {},
