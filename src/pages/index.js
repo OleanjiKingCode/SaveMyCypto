@@ -1,27 +1,13 @@
 import { Inter, Fondamento } from "next/font/google";
 import Lottie from "lottie-react";
-import { Dialog, Transition } from "@headlessui/react";
 import arrow from "./../data/arrowBlack.json";
-import { Fragment, useState } from "react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const fondamento = Fondamento({
-  weight: "400",
-  subsets: ["latin"],
-});
+
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(true);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
   return (
     <div
       className={`flex min-h-screen flex-col items-center space-y-9 p-24 bg-white w-full ${inter.className}`}
@@ -48,14 +34,15 @@ export default function Home() {
           height: 70,
         }}
       />
-      <div
+
+      <Link
         className={`bg-black px-5 py-4 cursor-pointer rounded-3xl text-white font-semibold text-2xl `}
-        onClick={openModal}
+        href="./signup"
       >
         Get Started
-      </div>
+      </Link>
 
-      <Transition appear show={isOpen} as={Fragment}>
+      {/* <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
@@ -70,6 +57,7 @@ export default function Home() {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
+           
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
@@ -87,33 +75,7 @@ export default function Home() {
                   >
                     Sign Up
                   </Dialog.Title>
-                  <div className="mt-4 flex flex-col space-y-4">
-                    <div className="flex flex-row w-full space-x-3">
-                      <span className="w-[40%]">Official Name:</span>{" "}
-                      <input
-                        type="text"
-                        className="w-full h-6 border-slate-600 border-[1px] rounded-lg"
-                      />
-                    </div>
-                    <div className="flex flex-row space-x-3">
-                      <span className="w-[40%]">Nickname:</span>{" "}
-                      <input
-                        type="text"
-                        className="w-full h-6 border-slate-600 border-[1px] rounded-lg"
-                      />
-                    </div>
-                    <div className="flex flex-row space-x-3">
-                      <span className="w-[40%]">Email:</span>{" "}
-                      <input
-                        type="text"
-                        className="w-full h-6 border-slate-600 border-[1px] rounded-lg"
-                      />
-                    </div>
-                    <div className="flex flex-row space-x-3">
-                      <span className="w-[40%]">Address:</span>{" "}
-                      <ConnectButton />
-                    </div>
-                  </div>
+              
 
                   <div className="mt-4 flex justify-center">
                     <button
@@ -129,7 +91,7 @@ export default function Home() {
             </div>
           </div>
         </Dialog>
-      </Transition>
+      </Transition> */}
     </div>
   );
 }
