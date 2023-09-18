@@ -3,6 +3,7 @@ import Lottie from "lottie-react";
 import { Dialog, Transition } from "@headlessui/react";
 import arrow from "./../data/arrowBlack.json";
 import { Fragment, useState } from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -107,6 +108,10 @@ export default function Home() {
                         type="text"
                         className="w-full h-6 border-slate-600 border-[1px] rounded-lg"
                       />
+                    </div>
+                    <div className="flex flex-row space-x-3">
+                      <span className="w-[40%]">Address:</span>{" "}
+                      <ConnectButton />
                     </div>
                   </div>
 
