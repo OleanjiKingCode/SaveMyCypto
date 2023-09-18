@@ -22,11 +22,8 @@ const Step2 = () => {
       <div className=" grid grid-cols-4 gap-4 py-7">
         {walletDetails.mnemonic.map((item, i) => {
           return (
-            <div className="flex flex-col gap-3 text-center">
-              <div
-                key={i}
-                className="p-4 rounded-lg font-semibold text-center bg-slate-200 text-black "
-              >
+            <div key={i} className="flex flex-col gap-3 text-center">
+              <div className="p-4 rounded-lg font-semibold text-center bg-slate-200 text-black ">
                 {item}
               </div>
               <span className={`${fondamento.className} `}>{i + 1}</span>

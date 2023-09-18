@@ -4,7 +4,8 @@ import { fondamento } from "./_app";
 import Step1 from "./step1";
 import Step2 from "./step2";
 
-export default function signup() {
+export default function Signup() {
+  const arraySteps = [<Step1 key="step1" />, <Step2 key="step2" />];
   const {
     currentStepIndex,
     steps,
@@ -13,11 +14,10 @@ export default function signup() {
     next,
     isFirstIndex,
     isLastIndex,
-  } = useMultipleForm([<Step1 />, <Step2 />]);
+  } = useMultipleForm(arraySteps);
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white py-5 w-[40%] h-[50%] px-9 rounded-lg shadow-md">
-        
         {step}
         <div
           className={`w-full flex flex-row ${
