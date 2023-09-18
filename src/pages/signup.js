@@ -17,11 +17,7 @@ export default function signup() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white py-5 w-[40%] h-[50%] px-9 rounded-lg shadow-md">
-        <div
-          className={`text-xl font-medium w-full text-center leading-6 text-gray-900 ${fondamento.className} `}
-        >
-          Sign Up
-        </div>
+        
         {step}
         <div
           className={`w-full flex flex-row ${
