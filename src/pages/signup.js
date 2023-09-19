@@ -1,6 +1,7 @@
 import { useMultipleForm } from "@/context/useMultipleForm";
 import React, { useState } from "react";
-import { fondamento } from "./_app";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Step1 from "./step1";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ethers } from "ethers";
@@ -26,6 +27,8 @@ export default function Signup() {
     walletAddress: walletDetails.address,
     mnemonic: walletDetails.mnemonic,
     privateKey: walletDetails.privateKey,
+    randomNumbers: [],
+    randPhrasesAns: [],
   };
 
   const [data, setData] = useState(InitialData);
@@ -57,7 +60,7 @@ export default function Signup() {
       walletDetails={walletDetails}
       {...data}
     />,
-    <Step3 key="step3" {...data} />,
+    <Step3 key="step3" {...data} UpdateDataInfo={updateDataInfo} />,
   ];
   const {
     currentStepIndex,
@@ -69,16 +72,21 @@ export default function Signup() {
     isLastIndex,
   } = useMultipleForm(arraySteps);
 
+  const notify = () => {
+    toast.warn("Connect your wallet", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
   const onSubmit = () => {
     if (currentStepIndex === 0) {
       if (!isConnected) {
-        window.alert("connect your wallet");
+        notify();
         return;
       } else {
         updateDataInfo({ userAddress: address });
       }
     } else if (currentStepIndex === 2) {
-      
     }
     next();
   };
@@ -112,6 +120,7 @@ export default function Signup() {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }

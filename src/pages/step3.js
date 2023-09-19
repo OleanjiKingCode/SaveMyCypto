@@ -1,17 +1,23 @@
 import React from "react";
 import { fondamento } from "./_app";
 
-const Step3 = ({ mnemonic }) => {
+const Step3 = ({ UpdateDataInfo }) => {
   const getRandomPhrases = () => {
     const randomNumbers = [];
     while (randomNumbers.length < 5) {
       const randomNumber = Math.floor(Math.random() * 12) + 1;
       if (!randomNumbers.includes(randomNumber)) {
         randomNumbers.push(randomNumber);
+        randomNumbers.sort((a, b) => a - b);
       }
     }
+    UpdateDataInfo({ randomNumbers: randomNumbers });
     return randomNumbers;
   };
+
+  const chosenAnswers = () => {
+
+  }
 
   return (
     <>
@@ -35,6 +41,7 @@ const Step3 = ({ mnemonic }) => {
                   required
                   type="text"
                   className=" border-b-[1px] border-slate-800 bg-transparent w-full focus:border-b-[1px] outline-none"
+                  onChange={e=>}
                 />
               </div>
               <span className={`${fondamento.className} `}>{item}</span>
