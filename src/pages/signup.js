@@ -1,20 +1,51 @@
 import { useMultipleForm } from "@/context/useMultipleForm";
-import React from "react";
+import React, { useState } from "react";
 import { fondamento } from "./_app";
 import Step1 from "./step1";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Step2 from "./step2";
 
 export default function Signup() {
+  const InitialData = {
+    officialName: "",
+    email: "",
+    nickname: "",
+    address: "",
+    mnemonic: "",
+    privateKey: "",
+  };
+
+  const [data, setData] = useState(InitialData);
+
+  const updateDataInfo = (info) => {
+    console.log(info);
+    setData((prev) => {
+      return { ...prev, ...info };
+    });
+  };
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+
   const arraySteps = [
-    <Step1 key="step1" register={register} errors={errors} />,
-    <Step2 key="step2" />,
+    <Step1
+      key="step1"
+      register={register}
+      errors={errors}
+      UpdateDataInfo={updateDataInfo}
+      {...data}
+    />,
+    <Step2
+      key="step2"
+      register={register}
+      errors={errors}
+      UpdateDataInfo={updateDataInfo}
+      {...data}
+    />,
   ];
   const {
     currentStepIndex,
@@ -26,8 +57,12 @@ export default function Signup() {
     isLastIndex,
   } = useMultipleForm(arraySteps);
 
-  const onSubmit = ({ firstName }) => {
-    console.log(firstName);
+  const onSubmit = () => {
+    if (currentStepIndex === 0) {
+      if (!data.address.length < 1) {
+        window.alert("connect your wallet");
+      }
+    }
     next();
   };
 

@@ -2,9 +2,15 @@ import React from "react";
 import { fondamento } from "./_app";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
-import { useForm, SubmitHandler } from "react-hook-form";
 
-const Step1 = ({ register, errors }) => {
+const Step1 = ({
+  register,
+  errors,
+  officialName,
+  nickname,
+  email,
+  UpdateDataInfo,
+}) => {
   return (
     <div>
       <div
@@ -21,13 +27,10 @@ const Step1 = ({ register, errors }) => {
               className="w-full h-6 py-4 px-3 border-slate-600 border-[1px] rounded-lg"
               id="name"
               placeholder="Enter your Official Name"
-              {...register("name", {
-                required: "Please enter your Official Name",
-                minLength: {
-                  value: 6,
-                  message: "Official Name should be more than 6 chars",
-                },
-              })}
+              value={officialName}
+              onChange={(e) => UpdateDataInfo({ officialName: e.target.value })}
+              minLength={6}
+              required
             />
           </div>
           {errors.name && (
@@ -41,10 +44,10 @@ const Step1 = ({ register, errors }) => {
               type="text"
               className="w-full h-6 py-4 px-3 border-slate-600 border-[1px] rounded-lg"
               id="nick"
+              value={nickname}
+              onChange={(e) => UpdateDataInfo({ nickname: e.target.value })}
               placeholder="Enter your Official Name"
-              {...register("nick", {
-                required: "Please enter your nickname or common name you go by",
-              })}
+              required
             />
           </div>
           {errors.nick && (
@@ -58,14 +61,10 @@ const Step1 = ({ register, errors }) => {
               className="w-full h-6 py-4 px-3 border-slate-600 border-[1px] rounded-lg"
               id="email"
               type="email"
+              value={email}
               placeholder="Enter your email address"
-              {...register("email", {
-                required: "Please enter email",
-                pattern: {
-                  value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
-                  message: "Please enter valid email",
-                },
-              })}
+              onChange={(e) => UpdateDataInfo({ email: e.target.value })}
+              required
             />
           </div>
           {errors.email && (
