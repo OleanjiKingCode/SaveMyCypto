@@ -3,22 +3,34 @@ import React, { useState } from "react";
 import { fondamento } from "./_app";
 import Step1 from "./step1";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { ethers } from "ethers";
+import { useAccount } from "wagmi";
 import Step2 from "./step2";
+import Step3 from "./step3";
 
 export default function Signup() {
+  const { isConnected, address } = useAccount();
+  const wallet = ethers.Wallet.createRandom();
+
+  const walletDetails = {
+    privateKey: wallet.privateKey,
+    address: wallet.address,
+    mnemonic: wallet._mnemonic().phrase.split(" "),
+  };
+
   const InitialData = {
     officialName: "",
     email: "",
     nickname: "",
-    address: "",
-    mnemonic: "",
-    privateKey: "",
+    userAddress: "",
+    walletAddress: walletDetails.address,
+    mnemonic: walletDetails.mnemonic,
+    privateKey: walletDetails.privateKey,
   };
 
   const [data, setData] = useState(InitialData);
 
   const updateDataInfo = (info) => {
-    console.log(info);
     setData((prev) => {
       return { ...prev, ...info };
     });
@@ -41,11 +53,11 @@ export default function Signup() {
     />,
     <Step2
       key="step2"
-      register={register}
-      errors={errors}
       UpdateDataInfo={updateDataInfo}
+      walletDetails={walletDetails}
       {...data}
     />,
+    <Step3 key="step3" {...data} />,
   ];
   const {
     currentStepIndex,
@@ -59,9 +71,14 @@ export default function Signup() {
 
   const onSubmit = () => {
     if (currentStepIndex === 0) {
-      if (!data.address.length < 1) {
+      if (!isConnected) {
         window.alert("connect your wallet");
+        return;
+      } else {
+        updateDataInfo({ userAddress: address });
       }
+    } else if (currentStepIndex === 2) {
+      
     }
     next();
   };
@@ -73,10 +90,10 @@ export default function Signup() {
           {step}
           <div
             className={`w-full flex flex-row ${
-              isFirstIndex ? "justify-end" : "justify-between"
+              true ? "justify-end" : "justify-between"
             } items-center`}
           >
-            {!isFirstIndex && (
+            {/* {!isFirstIndex && (
               <button
                 className=" rounded-lg text-md py-2 px-5 text-center bg-black text-white "
                 onClick={previous}
@@ -84,7 +101,7 @@ export default function Signup() {
               >
                 Back
               </button>
-            )}
+            )} */}
 
             <button
               className=" rounded-lg text-md py-2 px-5 text-center bg-black text-white"

@@ -2,24 +2,23 @@ import React from "react";
 import { ethers } from "ethers";
 import { fondamento } from "./_app";
 
-const Step2 = () => {
-  const wallet = ethers.Wallet.createRandom();
-
-  const walletDetails = {
-    privateKey: wallet.privateKey,
-    address: wallet.address,
-    mnemonic: wallet._mnemonic().phrase.split(" "),
-  };
+const Step2 = ({ walletDetails }) => {
   return (
-    <div>
+    <>
       <div
         className={`text-xl font-medium w-full text-center leading-6 text-gray-900 ${fondamento.className} `}
       >
         New Wallet Created
       </div>
-
-      <span className="text-lg font-semibold">Secret Phrase:</span>
-      <div className=" grid grid-cols-4 gap-4 py-7">
+      <div className="w-full pt-1 pb-4 space-x-3">
+        <span className="text-lg font-semibold">Address :</span>
+        <span className="font-thin">{walletDetails.address} </span>
+      </div>
+      <span className="text-lg font-semibold">Secret Phrase: </span>
+      <span className="text-md font-semibold">
+        (Copy down the below phrase in a safe place){" "}
+      </span>
+      <div className=" grid grid-cols-4 gap-4 pt-2 pb-7">
         {walletDetails.mnemonic.map((item, i) => {
           return (
             <div key={i} className="flex flex-col gap-3 text-center">
@@ -31,11 +30,7 @@ const Step2 = () => {
           );
         })}
       </div>
-      <div className="w-full pt-1 pb-4 space-x-3">
-        <span className="text-lg font-semibold">Address :</span>
-        <span className="font-thin">{walletDetails.address} </span>
-      </div>
-    </div>
+    </>
   );
 };
 
