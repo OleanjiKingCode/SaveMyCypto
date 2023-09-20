@@ -47,20 +47,9 @@ export default function Signup() {
   } = useForm();
 
   const arraySteps = [
-    <Step1
-      key="step1"
-      register={register}
-      errors={errors}
-      UpdateDataInfo={updateDataInfo}
-      {...data}
-    />,
-    <Step2
-      key="step2"
-      UpdateDataInfo={updateDataInfo}
-      walletDetails={walletDetails}
-      {...data}
-    />,
-    <Step3 key="step3" {...data} UpdateDataInfo={updateDataInfo} />,
+    <Step1 key="step1" register={register} errors={errors} {...data} />,
+    <Step2 key="step2" walletDetails={walletDetails} {...data} />,
+    <Step3 key="step3" {...data} register={register} errors={errors} />,
   ];
   const {
     currentStepIndex,
@@ -78,15 +67,55 @@ export default function Signup() {
     });
   };
 
-  const onSubmit = () => {
+  const getRandomPhrases = () => {
+    const randomNumbers = [];
+    while (randomNumbers.length < 5) {
+      const randomNumber = Math.floor(Math.random() * 12) + 1;
+      if (!randomNumbers.includes(randomNumber)) {
+        randomNumbers.push(randomNumber);
+        randomNumbers.sort((a, b) => a - b);
+      }
+    }
+    updateDataInfo({
+      randomNumbers: randomNumbers,
+    });
+    return randomNumbers;
+  };
+
+  const onSubmit = ({
+    Val0,
+    Val1,
+    Val2,
+    Val3,
+    Val4,
+    officialName,
+    nick,
+    email,
+  }) => {
     if (currentStepIndex === 0) {
       if (!isConnected) {
         notify();
         return;
       } else {
-        updateDataInfo({ userAddress: address });
+        updateDataInfo({
+          userAddress: address,
+          officialName: officialName,
+          nick: nick,
+          email: email,
+        });
       }
+    } else if (currentStepIndex === 1) {
+      getRandomPhrases();
     } else if (currentStepIndex === 2) {
+      console.log(
+        Val0,
+        Val1,
+        Val2,
+        Val3,
+        Val4,
+        data.randomNumbers,
+        data.randPhrasesAns
+      );
     }
     next();
   };

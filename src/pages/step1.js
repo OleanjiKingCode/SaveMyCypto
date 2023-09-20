@@ -25,17 +25,22 @@ const Step1 = ({
             <input
               type="text"
               className="w-full h-6 py-4 px-3 border-slate-600 border-[1px] rounded-lg"
-              id="name"
+              id="officialName"
               placeholder="Enter your Official Name"
-              value={officialName}
-              onChange={(e) => UpdateDataInfo({ officialName: e.target.value })}
-              minLength={6}
-              required
+              {...register("officialName", {
+                required: "Please enter your Official Name",
+                minLength: {
+                  value: 6,
+                  message: "Official Name should be more than 6 chars",
+                },
+              })}
             />
+            {errors.officialName && (
+              <div className="py-1 text-red-500">
+                {errors.officialName.message}
+              </div>
+            )}
           </div>
-          {errors.name && (
-            <div className="py-1 text-red-500">{errors.name.message}</div>
-          )}
         </div>
         <div className="flex flex-col w-full space-y-3 ">
           <div className="flex flex-row space-x-3 items-center ">
@@ -44,15 +49,15 @@ const Step1 = ({
               type="text"
               className="w-full h-6 py-4 px-3 border-slate-600 border-[1px] rounded-lg"
               id="nick"
-              value={nickname}
-              onChange={(e) => UpdateDataInfo({ nickname: e.target.value })}
               placeholder="Enter your Official Name"
-              required
+              {...register("nick", {
+                required: "Please enter your nickname or common name you go by",
+              })}
             />
+            {errors.nick && (
+              <div className="py-1 text-red-500">{errors.nick.message}</div>
+            )}
           </div>
-          {errors.nick && (
-            <div className="py-1 text-red-500">{errors.nick.message}</div>
-          )}
         </div>
         <div className="flex flex-col w-full space-y-3 ">
           <div className="flex flex-row space-x-3 items-center">
@@ -61,15 +66,19 @@ const Step1 = ({
               className="w-full h-6 py-4 px-3 border-slate-600 border-[1px] rounded-lg"
               id="email"
               type="email"
-              value={email}
               placeholder="Enter your email address"
-              onChange={(e) => UpdateDataInfo({ email: e.target.value })}
-              required
+              {...register("email", {
+                required: "Please enter email",
+                pattern: {
+                  value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
+                  message: "Please enter valid email",
+                },
+              })}
             />
+            {errors.email && (
+              <div className="text-red-500 py-1">{errors.email.message}</div>
+            )}
           </div>
-          {errors.email && (
-            <div className="text-red-500 py-1">{errors.email.message}</div>
-          )}
         </div>
         <div className="flex justify-center">
           <ConnectButton />

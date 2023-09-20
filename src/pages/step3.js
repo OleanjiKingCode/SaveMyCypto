@@ -1,24 +1,7 @@
 import React from "react";
 import { fondamento } from "./_app";
 
-const Step3 = ({ UpdateDataInfo }) => {
-  const getRandomPhrases = () => {
-    const randomNumbers = [];
-    while (randomNumbers.length < 5) {
-      const randomNumber = Math.floor(Math.random() * 12) + 1;
-      if (!randomNumbers.includes(randomNumber)) {
-        randomNumbers.push(randomNumber);
-        randomNumbers.sort((a, b) => a - b);
-      }
-    }
-    UpdateDataInfo({ randomNumbers: randomNumbers });
-    return randomNumbers;
-  };
-
-  const chosenAnswers = () => {
-
-  }
-
+const Step3 = ({ register, errors, randomNumbers }) => {
   return (
     <>
       <div
@@ -33,16 +16,19 @@ const Step3 = ({ UpdateDataInfo }) => {
       </span>
 
       <div className=" grid grid-cols-4 gap-4 pt-4 pb-7">
-        {getRandomPhrases().map((item, i) => {
+        {randomNumbers.map((item, i) => {
           return (
             <div key={i} className="flex flex-col gap-3 text-center">
               <div className="p-4 rounded-lg font-semibold text-center bg-slate-200 text-black ">
                 <input
-                  required
                   type="text"
+                  id={`Val${i}`}
                   className=" border-b-[1px] border-slate-800 bg-transparent w-full focus:border-b-[1px] outline-none"
-                  onChange={e=>}
+                  {...register(`Val${i}`, {
+                    required: "Please enter the phrase",
+                  })}
                 />
+                {errors[`Val${i}`] && <div className="text-red-500">*</div>}
               </div>
               <span className={`${fondamento.className} `}>{item}</span>
             </div>
