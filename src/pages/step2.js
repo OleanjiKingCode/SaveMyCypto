@@ -2,7 +2,7 @@ import React from "react";
 import { ethers } from "ethers";
 import { fondamento } from "./_app";
 
-const Step2 = ({ walletDetails }) => {
+const Step2 = ({ mnemonic, walletAddress }) => {
   return (
     <>
       <div
@@ -12,14 +12,14 @@ const Step2 = ({ walletDetails }) => {
       </div>
       <div className="w-full pt-1 pb-4 space-x-3">
         <span className="text-lg font-semibold">Address :</span>
-        <span className="font-thin">{walletDetails.address} </span>
+        <span className="font-thin">{walletAddress} </span>
       </div>
       <span className="text-lg font-semibold">Secret Phrase: </span>
       <span className="text-md font-semibold">
         (Copy down the below phrase in a safe place){" "}
       </span>
       <div className=" grid grid-cols-4 gap-4 pt-2 pb-7">
-        {walletDetails.mnemonic.map((item, i) => {
+        {mnemonic.map((item, i) => {
           return (
             <div key={i} className="flex flex-col gap-3 text-center">
               <div className="p-4 rounded-lg cursor-pointer font-semibold text-center bg-slate-200 text-black ">

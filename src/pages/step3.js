@@ -22,13 +22,13 @@ const Step3 = ({ register, errors, randomNumbers }) => {
               <div className="p-4 rounded-lg font-semibold text-center bg-slate-200 text-black ">
                 <input
                   type="text"
-                  id={`Val${i}`}
+                  id={`Val${i + 1}`}
                   className=" border-b-[1px] border-slate-800 bg-transparent w-full focus:border-b-[1px] outline-none"
-                  {...register(`Val${i}`, {
+                  {...register(`Val${i + 1}`, {
                     required: "Please enter the phrase",
                   })}
                 />
-                {errors[`Val${i}`] && <div className="text-red-500">*</div>}
+                {errors[`Val${i + 1}`] && <div className="text-red-500">*</div>}
               </div>
               <span className={`${fondamento.className} `}>{item}</span>
             </div>

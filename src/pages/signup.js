@@ -8,25 +8,26 @@ import { ethers } from "ethers";
 import { useAccount } from "wagmi";
 import Step2 from "./step2";
 import Step3 from "./step3";
+import Step4 from "./step4";
 
 export default function Signup() {
   const { isConnected, address } = useAccount();
-  const wallet = ethers.Wallet.createRandom();
+  // const wallet = ethers.Wallet.createRandom();
 
-  const walletDetails = {
-    privateKey: wallet.privateKey,
-    address: wallet.address,
-    mnemonic: wallet._mnemonic().phrase.split(" "),
-  };
+  // const walletDetails = {
+  //   privateKey: wallet.privateKey,
+  //   address: wallet.address,
+  //   mnemonic: wallet._mnemonic().phrase.split(" "),
+  // };
 
   const InitialData = {
     officialName: "",
     email: "",
     nickname: "",
     userAddress: "",
-    walletAddress: walletDetails.address,
-    mnemonic: walletDetails.mnemonic,
-    privateKey: walletDetails.privateKey,
+    walletAddress: "",
+    mnemonic: [],
+    privateKey: "",
     randomNumbers: [],
     randPhrasesAns: [],
   };
@@ -48,8 +49,9 @@ export default function Signup() {
 
   const arraySteps = [
     <Step1 key="step1" register={register} errors={errors} {...data} />,
-    <Step2 key="step2" walletDetails={walletDetails} {...data} />,
+    <Step2 key="step2" {...data} />,
     <Step3 key="step3" {...data} register={register} errors={errors} />,
+    <Step4 key="step4" {...data} />,
   ];
   const {
     currentStepIndex,
@@ -63,6 +65,12 @@ export default function Signup() {
 
   const notify = () => {
     toast.warn("Connect your wallet", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+  const wrongEntry = () => {
+    toast.warn("You have entered a wrong phrase", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
@@ -83,15 +91,16 @@ export default function Signup() {
   };
 
   const onSubmit = ({
-    Val0,
     Val1,
     Val2,
     Val3,
     Val4,
+    Val5,
     officialName,
     nick,
     email,
   }) => {
+    let incorrectEntryFound = false;
     if (currentStepIndex === 0) {
       if (!isConnected) {
         notify();
@@ -103,21 +112,34 @@ export default function Signup() {
           nick: nick,
           email: email,
         });
+        const wallet = ethers.Wallet.createRandom();
+
+        const walletDetails = {
+          privateKey: wallet.privateKey,
+          address: wallet.address,
+          mnemonic: wallet._mnemonic().phrase.split(" "),
+        };
+        updateDataInfo({
+          walletAddress: walletDetails.address,
+          mnemonic: walletDetails.mnemonic,
+          privateKey: walletDetails.privateKey,
+        });
       }
     } else if (currentStepIndex === 1) {
       getRandomPhrases();
     } else if (currentStepIndex === 2) {
-      console.log(
-        Val0,
-        Val1,
-        Val2,
-        Val3,
-        Val4,
-        data.randomNumbers,
-        data.randPhrasesAns
-      );
+      const allAnswers = [Val1, Val2, Val3, Val4, Val5];
+      data.randomNumbers.forEach((item, i) => {
+        if (data.mnemonic[item - 1] !== allAnswers[i]) {
+          wrongEntry();
+          incorrectEntryFound = true;
+          return;
+        }
+      });
     }
-    next();
+    if (!incorrectEntryFound) {
+      next();
+    }
   };
 
   return (
