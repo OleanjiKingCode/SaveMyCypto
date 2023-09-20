@@ -51,7 +51,7 @@ export default function Signup() {
     <Step1 key="step1" register={register} errors={errors} {...data} />,
     <Step2 key="step2" {...data} />,
     <Step3 key="step3" {...data} register={register} errors={errors} />,
-    <Step4 key="step4" {...data} />,
+    <Step4 key="step4" {...data} register={register} errors={errors}  />,
   ];
   const {
     currentStepIndex,

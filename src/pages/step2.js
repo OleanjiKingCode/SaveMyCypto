@@ -22,7 +22,7 @@ const Step2 = ({ mnemonic, walletAddress }) => {
         {mnemonic.map((item, i) => {
           return (
             <div key={i} className="flex flex-col gap-3 text-center">
-              <div className="p-4 rounded-lg cursor-pointer font-semibold text-center bg-slate-200 text-black ">
+              <div className="p-4 rounded-lg cursor-pointer w-full font-semibold text-center bg-slate-200 text-black ">
                 {item}
               </div>
               <span className={`${fondamento.className} `}>{i + 1}</span>
