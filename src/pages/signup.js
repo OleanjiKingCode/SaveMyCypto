@@ -1,23 +1,25 @@
-import { useMultipleForm } from "@/context/useMultipleForm";
 import React, { useState, useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Step1 from "./step1";
 import { useForm } from "react-hook-form";
+import { useMultipleForm } from "@/context/useMultipleForm";
+import { CgSpinner } from "react-icons/cg";
+import { generateRandom5DigitCode } from "@/utilities/getRandomDigits";
+import { noWallet, wrongCode, wrongEntry } from "@/components/toasts";
 import { ethers } from "ethers";
 import { useAccount } from "wagmi";
+import Step1 from "./step1";
 import Step2 from "./step2";
 import Step3 from "./step3";
 import Step4 from "./step4";
-import { CgSpinner } from "react-icons/cg";
-import { generateRandom5DigitCode } from "@/utilities/getRandomDigits";
 import Step5 from "./step5";
+
 
 export default function Signup() {
   const { isConnected, address } = useAccount();
-  const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const [codeForEmail, setCodeForEmail] = useState("");
+
   useEffect(() => {
     setCodeForEmail(generateRandom5DigitCode());
   }, []);
@@ -32,13 +34,12 @@ export default function Signup() {
         body: JSON.stringify({ to, codeForEmail }),
       });
       if (response.status === 200) {
-        setStatus("Email sent successfully.");
+        console.log("Email sent successfully.");
       } else {
-        setStatus("Error sending email.");
+        console.log("Error sending email.");
       }
     } catch (error) {
       console.error("Error sending email:", error);
-      setStatus("Error sending email.");
     }
   };
 
@@ -74,32 +75,8 @@ export default function Signup() {
     <Step4 key="step4" {...data} register={register} errors={errors} />,
     <Step5 key="step5" {...data} />,
   ];
-  const {
-    currentStepIndex,
-    steps,
-    step,
-    previous,
-    next,
-    isFirstIndex,
-    isLastIndex,
-  } = useMultipleForm(arraySteps);
-
-  const notify = () => {
-    toast.warn("Connect your wallet", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-  };
-
-  const wrongEntry = () => {
-    toast.warn("You have entered a wrong phrase", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-  };
-  const wrongCode = () => {
-    toast.warn("You have entered a the wrong code", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-  };
+  const { currentStepIndex, step, next, isLastIndex } =
+    useMultipleForm(arraySteps);
 
   const getRandomPhrases = () => {
     const randomNumbers = [];
@@ -131,7 +108,7 @@ export default function Signup() {
     setLoading(true);
     if (currentStepIndex === 0) {
       if (!isConnected) {
-        notify();
+        noWallet();
         setLoading(false);
         return;
       } else {

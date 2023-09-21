@@ -15,7 +15,6 @@ export default function Home() {
         </span>
         <span>Crypto</span>
       </div>
-
       <div
         className={`text-black pt-[65px] text-center w-[70%] text-lg ${fondamento.className} `}
       >

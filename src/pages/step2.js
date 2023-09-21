@@ -1,5 +1,4 @@
 import React from "react";
-import { ethers } from "ethers";
 import { fondamento } from "./_app";
 
 const Step2 = ({ mnemonic, walletAddress }) => {
