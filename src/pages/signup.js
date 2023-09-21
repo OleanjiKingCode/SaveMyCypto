@@ -9,7 +9,7 @@ import { useAccount } from "wagmi";
 import Step2 from "./step2";
 import Step3 from "./step3";
 import Step4 from "./step4";
-import { ImSpinner10 } from "react-icons/im";
+import { CgSpinner } from "react-icons/cg";
 import { generateRandom5DigitCode } from "@/utilities/getRandomDigits";
 import Step5 from "./step5";
 
@@ -190,12 +190,17 @@ export default function Signup() {
               true ? "justify-end" : "justify-between"
             } items-center`}
           >
-
             <button
               className=" rounded-lg text-md py-2 px-5 text-center bg-black text-white"
               type="submit"
             >
-              {loading ? <ImSpinner10 /> : isLastIndex ? "Finish" : "Next"}
+              {loading ? (
+                <CgSpinner className="animate-spin" size={20} />
+              ) : isLastIndex ? (
+                "Finish"
+              ) : (
+                "Next"
+              )}
             </button>
           </div>
         </form>

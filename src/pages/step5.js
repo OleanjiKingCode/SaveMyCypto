@@ -17,28 +17,19 @@ const Step5 = ({
         Summary Of Sign Up Process
       </div>
 
-      <div className="text-lg w-full py-4 space-y-2">
-        <div className=" font-semibold space-x-2 flex flex-row   w-full">
-          <div className="w-40%">Official Name : </div>
-          <div className="font-normal "> {officialName} </div>
-        </div>
-        <div className=" font-semibold space-x-2 flex flex-row   w-full">
-          <div className="w-40%">Email:</div>{" "}
-          <div className="font-normal ">{email} Verified✅ </div>
-        </div>
-
-        <div className=" font-semibold space-x-2 flex flex-row   w-full">
-          <div className="w-40%">Nickname:</div>{" "}
-          <div className="font-normal "> {nickname} </div>
-        </div>
-        <div className=" font-semibold space-x-2 flex flex-row   w-full">
-          <div className="w-40% block">User Address:</div>
-          <div className="font-normal ">{shortenAddress(userAddress)} </div>
-        </div>
-        <div className=" font-semibold space-x-2 flex flex-row   w-full">
-          <div className="w-40%">NewWallet Address:</div>
-          <div className="font-normal ">{walletAddress} </div>
-        </div>
+      <div className="text-lg w-full py-4  grid grid-cols-2 gap-2">
+        <div className="w-40% font-semibold">Official Name: </div>
+        <div className="font-normal "> {officialName} </div>
+        <div className="w-40% font-semibold">Email:</div>{" "}
+        <div className="font-normal ">{email}</div>
+        <div className="w-40% font-semibold">Email Status:</div>{" "}
+        <div className="font-normal ">Verified✅ </div>
+        <div className="w-40% font-semibold">Nickname:</div>{" "}
+        <div className="font-normal "> {nickname} </div>
+        <div className="w-40% font-semibold">User Address:</div>
+        <div className="font-normal ">{shortenAddress(userAddress)} </div>
+        <div className="w-40% font-semibold">Wallet Address:</div>
+        <div className="font-normal ">{shortenAddress(walletAddress)} </div>
       </div>
     </>
   );
