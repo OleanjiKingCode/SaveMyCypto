@@ -23,7 +23,7 @@ const Step3 = ({ register, errors, randomNumbers }) => {
                 <input
                   type="text"
                   id={`Val${i + 1}`}
-                  className=" border-b-[1px] border-slate-800 bg-transparent w-full focus:border-b-[1px] outline-none"
+                  className=" border-b-[1px] border-slate-800 bg-transparent text-center w-full focus:border-b-[1px] outline-none"
                   {...register(`Val${i + 1}`, {
                     required: "Please enter the phrase",
                   })}

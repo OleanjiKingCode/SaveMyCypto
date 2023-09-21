@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Step1 from "./step1";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { ethers } from "ethers";
 import { useAccount } from "wagmi";
 import Step2 from "./step2";
@@ -12,13 +12,27 @@ import Step4 from "./step4";
 
 export default function Signup() {
   const { isConnected, address } = useAccount();
-  // const wallet = ethers.Wallet.createRandom();
+  const [status, setStatus] = useState("");
 
-  // const walletDetails = {
-  //   privateKey: wallet.privateKey,
-  //   address: wallet.address,
-  //   mnemonic: wallet._mnemonic().phrase.split(" "),
-  // };
+  const sendEmail = async (to) => {
+    try {
+      const response = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ to }), 
+      });
+      if (response.status === 200) {
+        setStatus("Email sent successfully.");
+      } else {
+        setStatus("Error sending email.");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      setStatus("Error sending email.");
+    }
+  };
 
   const InitialData = {
     officialName: "",
@@ -51,7 +65,7 @@ export default function Signup() {
     <Step1 key="step1" register={register} errors={errors} {...data} />,
     <Step2 key="step2" {...data} />,
     <Step3 key="step3" {...data} register={register} errors={errors} />,
-    <Step4 key="step4" {...data} register={register} errors={errors}  />,
+    <Step4 key="step4" {...data} register={register} errors={errors} />,
   ];
   const {
     currentStepIndex,
@@ -90,7 +104,7 @@ export default function Signup() {
     return randomNumbers;
   };
 
-  const onSubmit = ({
+  const onSubmit = async ({
     Val1,
     Val2,
     Val3,
@@ -112,8 +126,8 @@ export default function Signup() {
           nick: nick,
           email: email,
         });
+        await sendEmail(email);
         const wallet = ethers.Wallet.createRandom();
-
         const walletDetails = {
           privateKey: wallet.privateKey,
           address: wallet.address,
