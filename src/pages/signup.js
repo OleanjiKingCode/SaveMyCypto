@@ -13,6 +13,7 @@ import Step4 from "./step4";
 export default function Signup() {
   const { isConnected, address } = useAccount();
   const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const sendEmail = async (to) => {
     try {
@@ -21,7 +22,7 @@ export default function Signup() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ to }), 
+        body: JSON.stringify({ to }),
       });
       if (response.status === 200) {
         setStatus("Email sent successfully.");
@@ -115,9 +116,11 @@ export default function Signup() {
     email,
   }) => {
     let incorrectEntryFound = false;
+    setLoading(true);
     if (currentStepIndex === 0) {
       if (!isConnected) {
         notify();
+        setLoading(false);
         return;
       } else {
         updateDataInfo({
@@ -147,11 +150,13 @@ export default function Signup() {
         if (data.mnemonic[item - 1] !== allAnswers[i]) {
           wrongEntry();
           incorrectEntryFound = true;
+          setLoading(false);
           return;
         }
       });
     }
     if (!incorrectEntryFound) {
+      setLoading(false);
       next();
     }
   };
