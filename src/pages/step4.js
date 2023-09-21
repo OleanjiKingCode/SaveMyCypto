@@ -19,7 +19,7 @@ const Step4 = ({ email, register, errors }) => {
           type="text"
           className="w-48 h-6 py-4 my-4 text-center tracking-[10px] font-semibold text-xl px-3 border-slate-600 border-[1px] outline-none"
           id="code"
-          placeholder="Code"
+          placeholder="CODE"
           {...register("code", {
             required: "Please enter your the code sent to your email",
           })}

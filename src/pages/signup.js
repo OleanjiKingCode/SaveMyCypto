@@ -14,7 +14,6 @@ import Step3 from "./step3";
 import Step4 from "./step4";
 import Step5 from "./step5";
 
-
 export default function Signup() {
   const { isConnected, address } = useAccount();
   const [loading, setLoading] = useState(false);
