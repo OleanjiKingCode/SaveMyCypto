@@ -6,7 +6,7 @@ import { inter, fondamento } from "./_app";
 export default function Home() {
   return (
     <div
-      className={`flex min-h-screen flex-col items-center space-y-9 p-24 bg-white w-full ${inter.className}`}
+      className={`flex flex-col items-center space-y-9 px-24 py-16  w-full ${inter.className}`}
     >
       <div className="flex flex-row space-x-3 text-7xl w-full items-center justify-center text-center font-bold text-black">
         <span>Save</span>
@@ -37,8 +37,6 @@ export default function Home() {
       >
         Get Started
       </Link>
-
-      
     </div>
   );
 }

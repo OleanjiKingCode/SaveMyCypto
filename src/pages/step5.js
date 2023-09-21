@@ -1,5 +1,6 @@
 import React from "react";
 import { fondamento } from "./_app";
+import { shortenAddress } from "@/utilities/shortenAddress";
 
 const Step5 = ({
   officialName,
@@ -17,26 +18,26 @@ const Step5 = ({
       </div>
 
       <div className="text-lg w-full py-4 space-y-2">
-        <div className=" font-semibold space-x-5 w-full">
-          <span>Official Name : </span>
-          <span className="font-normal "> {officialName} </span>
+        <div className=" font-semibold space-x-2 flex flex-row   w-full">
+          <div className="w-40%">Official Name : </div>
+          <div className="font-normal "> {officialName} </div>
         </div>
-        <div className=" font-semibold space-x-5 w-full">
-          <span>Email:</span>{" "}
-          <span className="font-normal ">{email} Verified✅ </span>
+        <div className=" font-semibold space-x-2 flex flex-row   w-full">
+          <div className="w-40%">Email:</div>{" "}
+          <div className="font-normal ">{email} Verified✅ </div>
         </div>
 
-        <div className=" font-semibold space-x-5 w-full">
-          <span>Nickname:</span>{" "}
-          <span className="font-normal "> {nickname} </span>
+        <div className=" font-semibold space-x-2 flex flex-row   w-full">
+          <div className="w-40%">Nickname:</div>{" "}
+          <div className="font-normal "> {nickname} </div>
         </div>
-        <div className=" font-semibold space-x-5 w-full">
-          <span>User Address:</span>
-          <span className="font-normal ">{userAddress} </span>
+        <div className=" font-semibold space-x-2 flex flex-row   w-full">
+          <div className="w-40% block">User Address:</div>
+          <div className="font-normal ">{shortenAddress(userAddress)} </div>
         </div>
-        <div className=" font-semibold space-x-5 w-full">
-          <span>NewWallet Address:</span>
-          <span className="font-normal ">{walletAddress} </span>
+        <div className=" font-semibold space-x-2 flex flex-row   w-full">
+          <div className="w-40%">NewWallet Address:</div>
+          <div className="font-normal ">{walletAddress} </div>
         </div>
       </div>
     </>

@@ -181,7 +181,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-[90vh] bg-white">
       <div className="bg-white py-5 w-[40%] h-[50%] px-9 rounded-lg shadow-md">
         <form onSubmit={handleSubmit(onSubmit)}>
           {step}
@@ -190,15 +190,6 @@ export default function Signup() {
               true ? "justify-end" : "justify-between"
             } items-center`}
           >
-            {/* {!isFirstIndex && (
-              <button
-                className=" rounded-lg text-md py-2 px-5 text-center bg-black text-white "
-                onClick={previous}
-                type="button"
-              >
-                Back
-              </button>
-            )} */}
 
             <button
               className=" rounded-lg text-md py-2 px-5 text-center bg-black text-white"

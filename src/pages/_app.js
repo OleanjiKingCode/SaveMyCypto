@@ -10,6 +10,7 @@ import { mainnet, polygon } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { Inter, Fondamento } from "next/font/google";
+import Navbar from "@/components/navbar";
 
 export const fondamento = Fondamento({
   weight: "400",
@@ -58,7 +59,10 @@ export default function App({ Component, pageProps }) {
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains} theme={lightModeStyle}>
-        <Component {...pageProps} />
+        <div className="bg-white min-h-screen">
+          <Navbar className="h-5vh" />
+          <Component {...pageProps} />
+        </div>
       </RainbowKitProvider>
     </WagmiConfig>
   );
