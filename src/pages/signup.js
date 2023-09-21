@@ -1,5 +1,5 @@
 import { useMultipleForm } from "@/context/useMultipleForm";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Step1 from "./step1";
@@ -11,12 +11,17 @@ import Step3 from "./step3";
 import Step4 from "./step4";
 import { ImSpinner10 } from "react-icons/im";
 import { generateRandom5DigitCode } from "@/utilities/getRandomDigits";
+import Step5 from "./step5";
 
 export default function Signup() {
   const { isConnected, address } = useAccount();
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
-  const codeForEmail = generateRandom5DigitCode();
+  const [codeForEmail, setCodeForEmail] = useState("");
+  useEffect(() => {
+    setCodeForEmail(generateRandom5DigitCode());
+  }, []);
+
   const sendEmail = async (to) => {
     try {
       const response = await fetch("/api/sendEmail", {
@@ -46,7 +51,7 @@ export default function Signup() {
     mnemonic: [],
     privateKey: "",
     randomNumbers: [],
-    randPhrasesAns: [],
+    code: codeForEmail,
   };
 
   const [data, setData] = useState(InitialData);
@@ -67,6 +72,7 @@ export default function Signup() {
     <Step2 key="step2" {...data} />,
     <Step3 key="step3" {...data} register={register} errors={errors} />,
     <Step4 key="step4" {...data} register={register} errors={errors} />,
+    <Step5 key="step5" {...data} />,
   ];
   const {
     currentStepIndex,
@@ -86,6 +92,11 @@ export default function Signup() {
 
   const wrongEntry = () => {
     toast.warn("You have entered a wrong phrase", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+  const wrongCode = () => {
+    toast.warn("You have entered a the wrong code", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
@@ -113,6 +124,7 @@ export default function Signup() {
     Val5,
     officialName,
     nick,
+    code,
     email,
   }) => {
     let incorrectEntryFound = false;
@@ -126,7 +138,7 @@ export default function Signup() {
         updateDataInfo({
           userAddress: address,
           officialName: officialName,
-          nick: nick,
+          nickname: nick,
           email: email,
         });
         await sendEmail(email);
@@ -154,6 +166,13 @@ export default function Signup() {
           return;
         }
       });
+    } else if (currentStepIndex === 3) {
+      if (code !== codeForEmail) {
+        console.log(code, codeForEmail);
+        wrongCode();
+        setLoading(false);
+        return;
+      }
     }
     if (!incorrectEntryFound) {
       setLoading(false);
