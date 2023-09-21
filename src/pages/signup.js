@@ -9,12 +9,14 @@ import { useAccount } from "wagmi";
 import Step2 from "./step2";
 import Step3 from "./step3";
 import Step4 from "./step4";
+import { ImSpinner10 } from "react-icons/im";
+import { generateRandom5DigitCode } from "@/utilities/getRandomDigits";
 
 export default function Signup() {
   const { isConnected, address } = useAccount();
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const codeForEmail = generateRandom5DigitCode();
   const sendEmail = async (to) => {
     try {
       const response = await fetch("/api/sendEmail", {
@@ -22,7 +24,7 @@ export default function Signup() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ to }),
+        body: JSON.stringify({ to, codeForEmail }),
       });
       if (response.status === 200) {
         setStatus("Email sent successfully.");
@@ -48,7 +50,6 @@ export default function Signup() {
   };
 
   const [data, setData] = useState(InitialData);
-
   const updateDataInfo = (info) => {
     setData((prev) => {
       return { ...prev, ...info };
@@ -58,7 +59,6 @@ export default function Signup() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -185,7 +185,7 @@ export default function Signup() {
               className=" rounded-lg text-md py-2 px-5 text-center bg-black text-white"
               type="submit"
             >
-              {isLastIndex ? "Finish" : "Next"}
+              {loading ? <ImSpinner10 /> : isLastIndex ? "Finish" : "Next"}
             </button>
           </div>
         </form>
