@@ -1,16 +1,9 @@
 import React from "react";
-import { fondamento } from "../_app";
+import { fondamento } from "@/utilities/fonts";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 
-const Step1 = ({
-  register,
-  errors,
-  officialName,
-  nickname,
-  email,
-  UpdateDataInfo,
-}) => {
+const Step1 = ({ register, errors }) => {
   return (
     <div>
       <div

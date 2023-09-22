@@ -1,5 +1,5 @@
 import React from "react";
-import { fondamento } from "./_app";
+import { fondamento } from "@/utilities/fonts";
 import { shortenAddress } from "@/utilities/shortenAddress";
 
 const Step5 = ({

@@ -1,7 +1,7 @@
 import Lottie from "lottie-react";
 import arrow from "./../data/arrowBlack.json";
 import Link from "next/link";
-import { inter, fondamento } from "./_app";
+import { fondamento, inter } from "@/utilities/fonts";
 
 export default function Home() {
   return (
