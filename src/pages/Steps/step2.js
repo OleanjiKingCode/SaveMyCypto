@@ -18,7 +18,7 @@ const Step2 = ({ mnemonic, walletAddress }) => {
         (Copy down the below phrase in a safe place){" "}
       </span>
       <div className=" grid grid-cols-4 gap-4 pt-2 pb-7">
-        {mnemonic.map((item, i) => {
+        {mnemonic?.map((item, i) => {
           return (
             <div key={i} className="flex flex-col gap-3 text-center">
               <div className="p-4 rounded-lg cursor-pointer w-full font-semibold text-center bg-slate-200 text-black ">

@@ -16,7 +16,7 @@ const Step3 = ({ register, errors, randomNumbers }) => {
       </span>
 
       <div className=" grid grid-cols-4 gap-4 pt-4 pb-7">
-        {randomNumbers.map((item, i) => {
+        {randomNumbers?.map((item, i) => {
           return (
             <div key={i} className="flex flex-col gap-3 text-center">
               <div className="p-4 rounded-lg font-semibold text-center bg-slate-200 text-black ">
