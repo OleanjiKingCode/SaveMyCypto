@@ -1,7 +1,7 @@
 import React from "react";
 import { fondamento } from "@/utilities/fonts";
 
-const Step4 = ({ email, register, errors }) => {
+const Step4 = ({ register,errors, email }) => {
   return (
     <>
       <div
