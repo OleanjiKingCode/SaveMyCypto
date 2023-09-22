@@ -15,7 +15,7 @@ const Step3 = ({ register, errors, randomNumbers }) => {
         Enter the phrase appropriately
       </span>
 
-      <div className=" grid grid-cols-4 gap-4 pt-4 pb-7">
+      <div className=" grid grid-cols-3 sm:grid-cols-4 gap-4 pt-4 pb-7">
         {randomNumbers?.map((item, i) => {
           return (
             <div key={i} className="flex flex-col gap-3 text-center">

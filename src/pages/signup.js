@@ -158,7 +158,7 @@ export default function Signup() {
 
   return (
     <div className="flex justify-center items-center min-h-[90vh] bg-white">
-      <div className="bg-white py-5 h-[50%] w-[80%] lg:w-[40%] lg:h-[50%] sm:px-9 px-4 rounded-lg shadow-md">
+      <div className="bg-white py-5 h-[50%] w-[80%] lg:w-[45%] lg:h-[50%] sm:px-9 px-3 rounded-lg shadow-md">
         <form onSubmit={handleSubmit(onSubmit)}>
           {step}
           <div
