@@ -15,7 +15,9 @@ const Navbar = () => {
         </span>
         <span>Crypto</span>
       </Link>
-      <ConnectButton />
+      <div className="sm:block hidden">
+        <ConnectButton />
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Step1 = ({ register, errors }) => {
   return (
-    <div>
+    <>
       <div
         className={`text-xl font-medium w-full text-center leading-6 text-gray-900 ${fondamento.className} `}
       >
@@ -14,13 +14,15 @@ const Step1 = ({ register, errors }) => {
       <div className="py-6 flex flex-col space-y-8">
         <div className="flex flex-col w-full space-y-3 ">
           <div className="flex flex-row w-full space-x-3 items-center">
-            <label className="w-[60%]">Official Name:</label>{" "}
+            <label className="w-[60%] text-sm md:text-base">
+              Official Name:
+            </label>{" "}
             <input
               type="text"
               className="w-full h-6 py-4 px-3 border-slate-600 border-[1px] rounded-lg"
               id="officialName"
               placeholder="Enter your Official Name"
-              {...register("officialName", {
+              {...register(`officialName`, {
                 required: "Please enter your Official Name",
                 minLength: {
                   value: 6,
@@ -37,7 +39,7 @@ const Step1 = ({ register, errors }) => {
         </div>
         <div className="flex flex-col w-full space-y-3 ">
           <div className="flex flex-row space-x-3 items-center ">
-            <label className="w-[60%]">Nickname:</label>{" "}
+            <label className="w-[60%] text-sm md:text-base">Nickname:</label>{" "}
             <input
               type="text"
               className="w-full h-6 py-4 px-3 border-slate-600 border-[1px] rounded-lg"
@@ -54,7 +56,7 @@ const Step1 = ({ register, errors }) => {
         </div>
         <div className="flex flex-col w-full space-y-3 ">
           <div className="flex flex-row space-x-3 items-center">
-            <label className="w-[60%]">Email:</label>{" "}
+            <label className="w-[60%] text-sm md:text-base ">Email:</label>{" "}
             <input
               className="w-full h-6 py-4 px-3 border-slate-600 border-[1px] rounded-lg"
               id="email"
@@ -86,7 +88,7 @@ const Step1 = ({ register, errors }) => {
           </Link>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
