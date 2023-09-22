@@ -1,5 +1,5 @@
 import React from "react";
-import { fondamento } from "./_app";
+import { fondamento } from "../_app";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 

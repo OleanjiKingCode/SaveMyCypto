@@ -8,11 +8,11 @@ import { generateRandom5DigitCode } from "@/utilities/getRandomDigits";
 import { noWallet, wrongCode, wrongEntry } from "@/components/toasts";
 import { ethers } from "ethers";
 import { useAccount } from "wagmi";
-import Step1 from "./step1";
-import Step2 from "./step2";
-import Step3 from "./step3";
-import Step4 from "./step4";
-import Step5 from "./step5";
+import Step1 from "./Steps/step1";
+import Step2 from "./Steps/step2";
+import Step3 from "./Steps/step3";
+import Step4 from "./Steps/step4";
+import Step5 from "./Steps/step5";
 
 export default function Signup() {
   const { isConnected, address } = useAccount();
@@ -173,7 +173,7 @@ export default function Signup() {
               {loading ? (
                 <CgSpinner className="animate-spin" size={20} />
               ) : isLastIndex ? (
-                "Finish"
+                "Sign and Finish"
               ) : (
                 "Next"
               )}
