@@ -1,4 +1,3 @@
-# SaveYOURCrypto
 
 ![SaveYOURCrypto Logo](https://github.com/OleanjiKingCode/SaveMyCypto/blob/master/public/savyourcrypto.png)
 
@@ -23,5 +22,50 @@ These instructions will help you get a copy of the project up and running on you
 
 1. Clone the repository:
 
-   ```bash
+   ```
    git clone https://github.com/yourusername/SaveYOURCrypto.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```
+   cd SaveYOURCrypto
+   ```
+
+3. Install project dependencies:
+
+   ```
+   npm install
+
+   or
+
+   yarn
+   ```
+
+### Usage
+
+1. Start the SaveYOURCrypto application:
+
+   ```
+   npm run dev
+
+   or
+
+   yarn dev
+   ```
+
+2. Access the application in your web browser at [http://localhost:3000](http://localhost:3000).
+
+
+## Contributing
+
+We welcome contributions from the community! 
+
+
+## Contact
+
+If you have any questions or suggestions, please feel free to reach out to us:
+
+- Email: holamilean56@gmail.com
+- Twitter: [@SaveYourCrypto](https://twitter.com/SaveYourCrypto)
+- Join our [Discord Community](https://discord.gg/saveyourcrypto) for discussions and updates.
