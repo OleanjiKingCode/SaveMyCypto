@@ -1,6 +1,6 @@
 # SaveYOURCrypto
 
-![SaveYOURCrypto Logo](saveyourcrypto.png)
+![SaveYOURCrypto Logo](https://github.com/OleanjiKingCode/SaveMyCypto/blob/master/public/savyourcrypto.png)
 
 SaveYOURCrypto is an open-source project that empowers traders, developers, and anyone earning from the crypto space to securely lock up their assets for a predetermined period. When the lockup period expires or the assets are unlocked, the system sends a notification to the owner. If the owner doesn't respond within the first 5 days, the system automatically notifies the designated next of kin, providing instructions on how to withdraw the assets.
 
