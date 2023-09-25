@@ -13,6 +13,7 @@ import Step2 from "../components/Steps/step2";
 import Step3 from "../components/Steps/step3";
 import Step4 from "../components/Steps/step4";
 import Step5 from "../components/Steps/step5";
+import { RxExitFullScreen } from "react-icons/rx";
 
 export default function Signup() {
   const { isConnected, address } = useAccount();
@@ -67,15 +68,7 @@ export default function Signup() {
     formState: { errors },
   } = useForm();
 
-  // const arraySteps = [
-  //   <Step1 key="step1" {...data} register={register} errors={errors} />,
-  //   <Step2 key="step2" {...data} />,
-  //   <Step3 key="step3" {...data} register={register} errors={errors} />,
-  //   <Step4 key="step4" {...data} register={register} errors={errors} />,
-  //   <Step5 key="step5" {...data} />,
-  // ];
-
-  const { currentStepIndex, step, next, isLastIndex } = useMultipleForm([
+  const { currentStepIndex, next, isLastIndex } = useMultipleForm([
     "1",
     "2",
     "3",
@@ -83,30 +76,24 @@ export default function Signup() {
   ]);
 
   const arrayUI = () => {
-    switch (stepIndex) {
-      case 0:
-        return (
-          <Step1 key="step1" {...data} register={register} errors={errors} />
-        );
-        break;
-      case 1:
-        return <Step2 key="step2" {...data} />;
-        break;
-      case 2:
-        return (
-          <Step3 key="step3" {...data} register={register} errors={errors} />
-        );
-        break;
-      case 3:
-        return (
-          <Step4 key="step4" {...data} register={register} errors={errors} />
-        );
-        break;
-      case 4:
-        return <Step5 key="step5" {...data} />;
-        break;
-      default:
-        return null; // Handle other cases as needed
+    if (currentStepIndex === 0) {
+      return (
+        <Step1 key="step1" {...data} register={register} errors={errors} />
+      );
+    } else if (currentStepIndex === 1) {
+      return <Step2 key="step2" {...data} />;
+    } else if (currentStepIndex === 2) {
+      return (
+        <Step3 key="step3" {...data} register={register} errors={errors} />
+      );
+    } else if (currentStepIndex === 3) {
+      return (
+        <Step4 key="step4" {...data} register={register} errors={errors} />
+      );
+    } else if (currentStepIndex === 4) {
+      return <Step5 key="step5" {...data} />;
+    } else {
+      return null; // Handle other cases as needed
     }
   };
 
@@ -193,7 +180,7 @@ export default function Signup() {
     <div className="flex justify-center items-center min-h-[90vh] bg-white">
       <div className="bg-white py-5 h-[50%] w-[80%] lg:w-[45%] lg:h-[50%] sm:px-9 px-3 rounded-lg shadow-md">
         <form onSubmit={handleSubmit(onSubmit)}>
-          {arrayUI}
+          {arrayUI()}
           <div
             className={`w-full flex flex-row ${
               true ? "justify-end" : "justify-between"
