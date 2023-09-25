@@ -304,7 +304,7 @@ const Id = () => {
                         </div>
                         <div className="w-1/3 bg-white rounded p-4 mr-4">
                           <h2 className="text-lg font-semibold mb-4 flex justify-center">
-                            Next of Kin's Information
+                            Next of Kin&apos;s Information
                           </h2>
                           <div className="mb-4">
                             <label
