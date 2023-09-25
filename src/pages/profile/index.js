@@ -2,9 +2,10 @@ import Avatar from "boring-avatars";
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import { Tab } from "@headlessui/react";
-import { useAccount } from "wagmi";
 import { RxPlus } from "react-icons/rx";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useConnectModal, useAccountModal } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
+import { shortenAddress } from "@/utilities/shortenAddress";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -12,8 +13,9 @@ function classNames(...classes) {
 
 const Id = () => {
   let categories = ["About", "Saves", "Plans"];
-  const { address } = useAccount();
-
+  const { isConnected, address } = useAccount();
+  const { openConnectModal } = useConnectModal();
+  const { openAccountModal } = useAccountModal();
   const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -29,16 +31,6 @@ const Id = () => {
       return <div className="">GM, Oleanji</div>;
     } else if (cat === "Saves") {
       return (
-        // <div className="grid grid-cols-4 gap-8  w-full">
-        //   {[1, 2, 3, 4, 5, 6, 7, 8].map((num, i) => (
-        //     <div
-        //       className="bg-slate-200 w-[50%] ml-[24%] rounded-2xl h-20 text-black flex flex-row items-center justify-center"
-        //       key={i}
-        //     >
-        //       <span>{num}</span>
-        //     </div>
-        //   ))}
-        // </div>
         <div className="w-full flex flex-col gap-4 justify-center items-center outline-none">
           <div
             className="bg-slate-200 rounded-md hover:bg-slate-300 p-5"
@@ -144,21 +136,42 @@ const Id = () => {
                           <div className="mb-4">
                             <label
                               className="block text-gray-700 text-sm font-bold mb-2"
+                              htmlFor="receiverName"
+                            >
+                              Saving Box's Name{" "}
+                              <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="boxname"
+                              type="text"
+                              placeholder="Name"
+                              required
+                            />
+                          </div>
+                          <div className="mb-4">
+                            <label
+                              className="block text-gray-700 text-sm font-bold mb-2"
                               htmlFor="savingsAccount"
                             >
                               Savings Account{" "}
                               <span className="text-red-500">*</span>
                             </label>
-                            {/* <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="savingsAccount"
-                              type="text"
-                              placeholder="Savings Account"
-                              required
-                            /> */}
-                            <div className=" bg-blue-300 rounded-lg w-fit p-2 text-white flex items-center justify-center font-semibold">
-                              <ConnectButton />
-                            </div>
+                            {!isConnected ? (
+                              <div
+                                onClick={openConnectModal}
+                                className=" bg-blue-300 cursor-pointer rounded-lg w-full p-2 text-white flex items-center justify-center font-semibold"
+                              >
+                                ConnectButton
+                              </div>
+                            ) : (
+                              <div
+                                onClick={openAccountModal}
+                                className=" bg-blue-300 cursor-pointer rounded-lg w-full p-2 text-white flex items-center justify-center font-semibold"
+                              >
+                                {shortenAddress(address)}
+                              </div>
+                            )}
                           </div>
                           <div className="mb-4">
                             <label
@@ -176,6 +189,23 @@ const Id = () => {
                               required
                               max="90"
                             />
+                          </div>
+
+                          <div className="mb-4">
+                            <label
+                              className="block text-gray-700 text-sm font-bold mb-2"
+                              htmlFor="token"
+                            >
+                              Token <span className="text-red-500">*</span>
+                            </label>
+                            <select
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="token"
+                              required
+                            >
+                              <option value="ETH">ETH</option>
+                              <option value="USDC">USDC</option>
+                            </select>
                           </div>
                           <div className="mb-4">
                             <label
