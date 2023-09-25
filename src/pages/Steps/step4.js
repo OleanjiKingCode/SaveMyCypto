@@ -1,7 +1,7 @@
 import React from "react";
 import { fondamento } from "@/utilities/fonts";
 
-const Step4 = ({ register,errors, email }) => {
+const Step4 = ({ register, errors, email }) => {
   return (
     <>
       <div
@@ -18,7 +18,7 @@ const Step4 = ({ register,errors, email }) => {
         <input
           type="text"
           className="w-48 h-6 py-4 my-4 text-center tracking-[10px] font-semibold text-xl px-3 border-slate-600 border-[1px] outline-none"
-          id="code"
+          id={`code`}
           placeholder="CODE"
           {...register(`code`, {
             required: "Please enter your the code sent to your email",
