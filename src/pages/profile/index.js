@@ -55,9 +55,9 @@ const Id = () => {
     next();
   };
 
-  const verifySubmit = async() => {
-
-  }
+  const verifySubmit = async () => {
+    console.log(boxname);
+  };
 
   function closeModal() {
     setIsOpen(false);
@@ -160,7 +160,11 @@ const Id = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-5xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel
+                  className={`w-full ${
+                    currentStepIndex === 1 ? "max-w-5xl" : "max-w-lg"
+                  } transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all`}
+                >
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 flex justify-center text-gray-900"
@@ -168,7 +172,7 @@ const Id = () => {
                     Create A New Savings Box
                   </Dialog.Title>
                   <div className="mt-2">
-                    {currentStepIndex === 0 && (
+                    {currentStepIndex === 1 && (
                       <form
                         className="bg-white rounded pt-2 mb-2"
                         onSubmit={handleSubmit(onSubmit)}
@@ -537,44 +541,132 @@ const Id = () => {
                         </div>
                       </form>
                     )}
-                    {currentStepIndex === 1 && (
-                      <div>
-                        <form
-                          className="bg-white rounded pt-2 mb-2"
-                          onSubmit={handleSubmit(verifySubmit)}
-                        >
-                          <div className="flex flex-row">
-                            <div className="w-1/3 bg-white rounded p-4 mr-4">
-                              <h2 className="text-lg font-semibold mb-4 flex justify-center">
-                                Account Saving Information
-                              </h2>
-                              <div className="mb-4">
-                                <label
-                                  className="block text-gray-700 text-sm font-bold mb-2"
-                                  htmlFor="receiverName"
-                                >
-                                  Saving Box&apos;s Name{" "}
-                                  <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                  id="boxname"
-                                  type="text"
-                                  placeholder="Name"
-                                  {...register(`boxname`, {
-                                    required: "Please enter this savings name",
-                                  })}
-                                />
-                                {errors.boxname && (
-                                  <div className="py-1 text-red-500">
-                                    {errors.boxname.message}
-                                  </div>
-                                )}
-                              </div>
+                    {currentStepIndex === 0 && (
+                      <form
+                        className="bg-white rounded pt-2 mb-2"
+                        onSubmit={handleSubmit(verifySubmit)}
+                      >
+                        <div className="flex flex-row">
+                          <div className="w-full bg-white rounded p-4 mr-4">
+                            <h2 className="text-lg font-semibold mb-4 ">
+                              Verification Of Information
+                            </h2>
+                            <div className="mb-2 w-full justify-between flex flex-row items-center">
+                              <label
+                                className="block text-gray-700 text-sm font-bold mb-2"
+                                htmlFor="receiverName"
+                              >
+                                Receiver&apos;s Email Code
+                                <span className="text-red-500">*</span>
+                              </label>
+                              <input
+                                type="text"
+                                className="w-48 h-6 py-4 my-4 text-center tracking-[10px] font-semibold text-xl px-3 border-slate-600 border-[1px] outline-none"
+                                id="receiversCode"
+                                placeholder="CODE"
+                                {...register("receiversCode", {
+                                  required:
+                                    "Please enter your the code sent to the receivers email",
+                                })}
+                              />
+                              {errors.receiversCode && (
+                                <div className="py-1 text-red-500">
+                                  {errors.receiversCode.message}
+                                </div>
+                              )}
+                            </div>
+                            <div className="mb-2 w-full justify-between flex flex-row items-center">
+                              <label
+                                className="block text-gray-700 text-sm font-bold mb-2"
+                                htmlFor="receiverName"
+                              >
+                                Nex Of Kin&apos;s Email Code
+                                <span className="text-red-500">*</span>
+                              </label>
+                              <input
+                                type="text"
+                                className="w-48 h-6 py-4 my-4 text-center tracking-[10px] font-semibold text-xl px-3 border-slate-600 border-[1px] outline-none"
+                                id="KinCode"
+                                placeholder="CODE"
+                                {...register("KinCode", {
+                                  required:
+                                    "Please enter your the code sent to the Next of Kins email",
+                                })}
+                              />
+                              {errors.KinCode && (
+                                <div className="py-1 text-red-500">
+                                  {errors.KinCode.message}
+                                </div>
+                              )}
+                            </div>
+                            <div className="mb-2 w-full justify-between flex flex-row items-center">
+                              <label
+                                className="block text-gray-700 text-sm font-bold mb-2"
+                                htmlFor="receiverName"
+                              >
+                                Receivers WhatsApp Code
+                                <span className="text-red-500">*</span>
+                              </label>
+                              <input
+                                type="text"
+                                className="w-48 h-6 py-4 my-4 text-center tracking-[10px] font-semibold text-xl px-3 border-slate-600 border-[1px] outline-none"
+                                id="receiversWA"
+                                placeholder="CODE"
+                                {...register("receiversWA", {
+                                  required:
+                                    "Please enter your the code sent to the receivers email",
+                                })}
+                              />
+                              {errors.receiversWA && (
+                                <div className="py-1 text-red-500">
+                                  {errors.receiversWA.message}
+                                </div>
+                              )}
+                            </div>
+                            <div className="mb-2 w-full justify-between flex flex-row items-center">
+                              <label
+                                className="block text-gray-700 text-sm font-bold mb-2"
+                                htmlFor="receiverName"
+                              >
+                                Next Of Kin's WhatsApp Code
+                                <span className="text-red-500">*</span>
+                              </label>
+                              <input
+                                type="text"
+                                className="w-48 h-6 py-4 my-4 text-center tracking-[10px] font-semibold text-xl px-3 border-slate-600 border-[1px] outline-none"
+                                id="NextofKinWA"
+                                placeholder="CODE"
+                                {...register("NextofKinWA", {
+                                  required:
+                                    "Please enter your the code sent to the receivers email",
+                                })}
+                              />
+                              {errors.NextofKinWA && (
+                                <div className="py-1 text-red-500">
+                                  {errors.NextofKinWA.message}
+                                </div>
+                              )}
                             </div>
                           </div>
-                        </form>
-                      </div>
+                        </div>
+                        <div className="mt-2 w-full flex flex-row justify-between">
+                          <button
+                            type="button"
+                            className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-800"
+                            onClick={closeModal}
+                          >
+                            Cancel
+                          </button>
+
+                          <button
+                            type="submit"
+                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-400"
+                            // onClick={closeModal}
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      </form>
                     )}
                   </div>
                 </Dialog.Panel>
