@@ -138,7 +138,7 @@ const Id = () => {
                               className="block text-gray-700 text-sm font-bold mb-2"
                               htmlFor="receiverName"
                             >
-                              Saving Box's Name{" "}
+                              Saving Box&apos;s Name{" "}
                               <span className="text-red-500">*</span>
                             </label>
                             <input
