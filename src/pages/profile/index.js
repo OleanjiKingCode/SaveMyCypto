@@ -247,7 +247,7 @@ const Id = () => {
                               className="block text-gray-700 text-sm font-bold mb-2"
                               htmlFor="receiverAddress"
                             >
-                              Address
+                              Wallet Address (optional)
                             </label>
                             <input
                               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -292,7 +292,7 @@ const Id = () => {
                               className="block text-gray-700 text-sm font-bold mb-2"
                               htmlFor="receiverNickname"
                             >
-                              Nickname
+                              Nickname (optional)
                             </label>
                             <input
                               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -326,7 +326,7 @@ const Id = () => {
                               className="block text-gray-700 text-sm font-bold mb-2"
                               htmlFor="kinAddress"
                             >
-                              Address
+                              Wallet Address (optional)
                             </label>
                             <input
                               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -371,7 +371,7 @@ const Id = () => {
                               className="block text-gray-700 text-sm font-bold mb-2"
                               htmlFor="kinNickname"
                             >
-                              Nickname
+                              Nickname (optional)
                             </label>
                             <input
                               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
