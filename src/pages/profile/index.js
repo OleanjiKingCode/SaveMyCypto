@@ -5,6 +5,8 @@ import { Tab } from "@headlessui/react";
 import { RxPlus } from "react-icons/rx";
 import { useConnectModal, useAccountModal } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
+import { useForm } from "react-hook-form";
+import { useMultipleForm } from "@/context/useMultipleForm";
 import { shortenAddress } from "@/utilities/shortenAddress";
 
 function classNames(...classes) {
@@ -12,11 +14,22 @@ function classNames(...classes) {
 }
 
 const Id = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const { currentStepIndex, next, isLastIndex } = useMultipleForm(["1", "2"]);
   let categories = ["About", "Saves", "Plans"];
   const { isConnected, address } = useAccount();
   const { openConnectModal } = useConnectModal();
   const { openAccountModal } = useAccountModal();
   const [isOpen, setIsOpen] = useState(false);
+
+  const onSubmit = async ({}) => {
+    console.log("dnnckjd");
+  };
 
   function closeModal() {
     setIsOpen(false);
@@ -127,7 +140,10 @@ const Id = () => {
                     Create A New Savings Box
                   </Dialog.Title>
                   <div className="mt-2">
-                    <form className="bg-white rounded pt-2 mb-2">
+                    <form
+                      className="bg-white rounded pt-2 mb-2"
+                      onSubmit={handleSubmit(onSubmit)}
+                    >
                       <div className="flex flex-row">
                         <div className="w-1/3 bg-white rounded p-4 mr-4">
                           <h2 className="text-lg font-semibold mb-4 flex justify-center">
@@ -146,8 +162,15 @@ const Id = () => {
                               id="boxname"
                               type="text"
                               placeholder="Name"
-                              required
+                              {...register(`boxname`, {
+                                required: "Please enter this savings name",
+                              })}
                             />
+                            {errors.boxname && (
+                              <div className="py-1 text-red-500">
+                                {errors.boxname.message}
+                              </div>
+                            )}
                           </div>
                           <div className="mb-4">
                             <label
@@ -186,9 +209,21 @@ const Id = () => {
                               id="percentageToSave"
                               type="number"
                               placeholder="Percentage to Save"
-                              required
-                              max="90"
+                              {...register(`percentageToSave`, {
+                                required:
+                                  "Please enter this savings percentage",
+                                max: {
+                                  value: 90,
+                                  message:
+                                    "Percentage cannot be greater than 90%",
+                                },
+                              })}
                             />
+                            {errors.percentageToSave && (
+                              <div className="py-1 text-red-500">
+                                {errors.percentageToSave.message}
+                              </div>
+                            )}
                           </div>
 
                           <div className="mb-4">
@@ -201,7 +236,7 @@ const Id = () => {
                             <select
                               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="token"
-                              required
+                              {...register("token")}
                             >
                               <option value="ETH">ETH</option>
                               <option value="USDC">USDC</option>
@@ -219,8 +254,16 @@ const Id = () => {
                               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="unlockDateTime"
                               type="datetime-local"
-                              required
+                              {...register("unlockDateTime", {
+                                required:
+                                  "Please choose an unlock time and date",
+                              })}
                             />
+                            {errors.unlockDateTime && (
+                              <div className="py-1 text-red-500">
+                                {errors.unlockDateTime.message}
+                              </div>
+                            )}
                           </div>
                         </div>
                         <div className="w-1/3 bg-white rounded p-4 mr-4">
@@ -239,8 +282,20 @@ const Id = () => {
                               id="receiverName"
                               type="text"
                               placeholder="Name"
-                              required
+                              {...register("receiverName", {
+                                required: "Please enter the receivers name",
+                                minLength: {
+                                  value: 3,
+                                  message:
+                                    "Receivers name should be more than 3 chars",
+                                },
+                              })}
                             />
+                            {errors.receiverName && (
+                              <div className="py-1 text-red-500">
+                                {errors.receiverName.message}
+                              </div>
+                            )}
                           </div>
                           <div className="mb-4">
                             <label
@@ -268,8 +323,20 @@ const Id = () => {
                               id="receiverEmail"
                               type="email"
                               placeholder="Email"
-                              required
+                              {...register("receiverEmail", {
+                                required: "Please enter the receivers email",
+                                pattern: {
+                                  value:
+                                    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
+                                  message: "Please enter valid email",
+                                },
+                              })}
                             />
+                            {errors.receiverEmail && (
+                              <div className="text-red-500 py-1">
+                                {errors.receiverEmail.message}
+                              </div>
+                            )}
                           </div>
                           <div className="mb-4">
                             <label
@@ -284,8 +351,16 @@ const Id = () => {
                               id="receiverPhone"
                               type="tel"
                               placeholder="WhatsApp phone number"
-                              required
+                              {...register("receiverPhone", {
+                                required:
+                                  "Please enter a valid whatsApp number",
+                              })}
                             />
+                            {errors.receiverPhone && (
+                              <div className="text-red-500 py-1">
+                                {errors.receiverPhone.message}
+                              </div>
+                            )}
                           </div>
                           <div className="mb-4">
                             <label
@@ -318,8 +393,20 @@ const Id = () => {
                               id="kinName"
                               type="text"
                               placeholder="Name"
-                              required
+                              {...register("kinName", {
+                                required: "Please enter the Kin's name",
+                                minLength: {
+                                  value: 3,
+                                  message:
+                                    "Kin's name should be more than 3 chars",
+                                },
+                              })}
                             />
+                            {errors.kinName && (
+                              <div className="py-1 text-red-500">
+                                {errors.kinName.message}
+                              </div>
+                            )}
                           </div>
                           <div className="mb-4">
                             <label
@@ -347,8 +434,20 @@ const Id = () => {
                               id="kinEmail"
                               type="email"
                               placeholder="Email"
-                              required
+                              {...register("kinEmail", {
+                                required: "Please enter Kin's email",
+                                pattern: {
+                                  value:
+                                    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
+                                  message: "Please enter valid email",
+                                },
+                              })}
                             />
+                            {errors.kinEmail && (
+                              <div className="text-red-500 py-1">
+                                {errors.kinEmail.message}
+                              </div>
+                            )}
                           </div>
                           <div className="mb-4">
                             <label
@@ -363,8 +462,16 @@ const Id = () => {
                               id="kinPhone"
                               type="tel"
                               placeholder="WhatsApp phone number"
-                              required
+                              {...register("receiverPhone", {
+                                required:
+                                  "Please enter a valid whatsApp number",
+                              })}
                             />
+                            {errors.receiverPhone && (
+                              <div className="text-red-500 py-1">
+                                {errors.receiverPhone.message}
+                              </div>
+                            )}
                           </div>
                           <div className="mb-4">
                             <label
@@ -382,25 +489,24 @@ const Id = () => {
                           </div>
                         </div>
                       </div>
+                      <div className="mt-2 w-full flex flex-row justify-between">
+                        <button
+                          type="button"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-800"
+                          onClick={closeModal}
+                        >
+                          Cancel
+                        </button>
+
+                        <button
+                          type="submit"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-400"
+                          // onClick={closeModal}
+                        >
+                          Submit
+                        </button>
+                      </div>
                     </form>
-                  </div>
-
-                  <div className="mt-4 w-full flex flex-row justify-between">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-800"
-                      onClick={closeModal}
-                    >
-                      Cancel
-                    </button>
-
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-400"
-                      // onClick={closeModal}
-                    >
-                      Submit
-                    </button>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
