@@ -172,7 +172,7 @@ const Id = () => {
                     Create A New Savings Box
                   </Dialog.Title>
                   <div className="mt-2">
-                    {currentStepIndex === 1 && (
+                    {currentStepIndex === 0 && (
                       <form
                         className="bg-white rounded pt-2 mb-2"
                         onSubmit={handleSubmit(onSubmit)}
@@ -541,7 +541,7 @@ const Id = () => {
                         </div>
                       </form>
                     )}
-                    {currentStepIndex === 0 && (
+                    {currentStepIndex === 1 && (
                       <form
                         className="bg-white rounded pt-2 mb-2"
                         onSubmit={handleSubmit(verifySubmit)}
@@ -628,7 +628,7 @@ const Id = () => {
                                 className="block text-gray-700 text-sm font-bold mb-2"
                                 htmlFor="receiverName"
                               >
-                                Next Of Kin's WhatsApp Code
+                                Next Of Kin&apos;s WhatsApp Code
                                 <span className="text-red-500">*</span>
                               </label>
                               <input
