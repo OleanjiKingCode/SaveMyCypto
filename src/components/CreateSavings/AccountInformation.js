@@ -4,6 +4,9 @@ import { shortenAddress } from "@/utilities/shortenAddress";
 
 const AccountInformation = ({
   register,
+  closeModal,
+  handleSubmit,
+  onSubmit,
   errors,
   openConnectModal,
   openAccountModal,
@@ -351,16 +354,37 @@ const AccountInformation = ({
   };
 
   return (
-    <div className="flex flex-row">
-      <AccountSavingInformation
-        register={register}
-        errors={errors}
-        openConnectModal={openConnectModal}
-        openAccountModal={openAccountModal}
-      />
-      <ReceiversInformation register={register} errors={errors} />
-      <NextOfKinInformation register={register} errors={errors} />
-    </div>
+    <form
+      className="bg-white rounded pt-2 mb-2"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="flex flex-row">
+        <AccountSavingInformation
+          register={register}
+          errors={errors}
+          openConnectModal={openConnectModal}
+          openAccountModal={openAccountModal}
+        />
+        <ReceiversInformation register={register} errors={errors} />
+        <NextOfKinInformation register={register} errors={errors} />
+      </div>
+      <div className="mt-2 w-full flex flex-row justify-between">
+        <button
+          type="button"
+          className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-800"
+          onClick={closeModal}
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          className="inline-flex justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-400"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
   );
 };
 export default AccountInformation;
